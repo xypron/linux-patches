@@ -22,7 +22,7 @@ index bdf16180f5ff..ee2a4e75e630 100644
  
 +config LEDS_SUN20I
 +	tristate "LED support for sun20i built-in LED controller"
-+	depends on LEDS_CLASS
++	depends on LEDS_CLASS_MULTICOLOR
 +	help
 +	  This option enables support for the LED controller in the
 +	  Allwinner sun20i SoCs.
