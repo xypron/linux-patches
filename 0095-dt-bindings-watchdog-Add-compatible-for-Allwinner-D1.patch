@@ -1,0 +1,26 @@
+From 5e75815c908c3d3fb481ea8a81b150b231f67084 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 6 Jun 2021 10:54:58 -0500
+Subject: [PATCH 095/120] dt-bindings: watchdog: Add compatible for Allwinner
+ D1
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ .../devicetree/bindings/watchdog/allwinner,sun4i-a10-wdt.yaml    | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/watchdog/allwinner,sun4i-a10-wdt.yaml b/Documentation/devicetree/bindings/watchdog/allwinner,sun4i-a10-wdt.yaml
+index 9aa3c313c49f..fa53cd50515b 100644
+--- a/Documentation/devicetree/bindings/watchdog/allwinner,sun4i-a10-wdt.yaml
++++ b/Documentation/devicetree/bindings/watchdog/allwinner,sun4i-a10-wdt.yaml
+@@ -28,6 +28,7 @@ properties:
+       - items:
+           - const: allwinner,suniv-f1c100s-wdt
+           - const: allwinner,sun4i-a10-wdt
++      - const: allwinner,sun20i-d1-wdt
+ 
+   reg:
+     maxItems: 1
+-- 
+2.32.0
+

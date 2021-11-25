@@ -1,0 +1,25 @@
+From a2fd4aca22d2665c4961b0e906a2b30390c748a9 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 16 May 2021 21:22:23 -0500
+Subject: [PATCH 023/120] clk: sunxi-ng: Add missing dependency for A83T CCU
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/clk/sunxi-ng/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/clk/sunxi-ng/Kconfig b/drivers/clk/sunxi-ng/Kconfig
+index cd46d8853876..e76e1676f0f0 100644
+--- a/drivers/clk/sunxi-ng/Kconfig
++++ b/drivers/clk/sunxi-ng/Kconfig
+@@ -71,6 +71,7 @@ config SUN8I_A33_CCU
+ config SUN8I_A83T_CCU
+ 	bool "Support for the Allwinner A83T CCU"
+ 	default MACH_SUN8I
++	depends on MACH_SUN8I || COMPILE_TEST
+ 
+ config SUN8I_H3_CCU
+ 	bool "Support for the Allwinner H3 CCU"
+-- 
+2.32.0
+

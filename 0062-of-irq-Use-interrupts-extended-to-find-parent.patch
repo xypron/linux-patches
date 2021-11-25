@@ -1,0 +1,27 @@
+From 538626c48cf857eae1e74aaccb1e67137c7cf238 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 13 Jun 2021 23:43:58 -0500
+Subject: [PATCH 062/120] of/irq: Use interrupts-extended to find parent
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/of/irq.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/of/irq.c b/drivers/of/irq.c
+index 352e14b007e7..d84d27fb2203 100644
+--- a/drivers/of/irq.c
++++ b/drivers/of/irq.c
+@@ -60,7 +60,8 @@ struct device_node *of_irq_find_parent(struct device_node *child)
+ 		return NULL;
+ 
+ 	do {
+-		if (of_property_read_u32(child, "interrupt-parent", &parent)) {
++		if (of_property_read_u32(child, "interrupt-parent", &parent) &&
++		    of_property_read_u32(child, "interrupts-extended", &parent)) {
+ 			p = of_get_parent(child);
+ 		} else	{
+ 			if (of_irq_workarounds & OF_IMAP_NO_PHANDLE)
+-- 
+2.32.0
+

@@ -1,0 +1,28 @@
+From c00cecf55248350afbeaba42a0b737a25694537a Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 13 Jun 2021 23:44:48 -0500
+Subject: [PATCH 008/120] cpuidle: sbi: Fix build with !CONFIG_SMP
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/cpuidle/cpuidle-sbi.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/cpuidle/cpuidle-sbi.c b/drivers/cpuidle/cpuidle-sbi.c
+index b04664c8877d..5ef1ac12d831 100644
+--- a/drivers/cpuidle/cpuidle-sbi.c
++++ b/drivers/cpuidle/cpuidle-sbi.c
+@@ -19,8 +19,10 @@
+ #include <linux/platform_device.h>
+ #include <linux/pm_domain.h>
+ #include <linux/pm_runtime.h>
++
+ #include <asm/cpuidle.h>
+ #include <asm/sbi.h>
++#include <asm/smp.h>
+ #include <asm/suspend.h>
+ 
+ #include "dt_idle_states.h"
+-- 
+2.32.0
+

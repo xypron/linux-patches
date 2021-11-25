@@ -1,0 +1,32 @@
+From 5975c6c440460c533bba0eb58ac99d5c3f572958 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 6 Jun 2021 11:05:20 -0500
+Subject: [PATCH 072/120] squash? pwm: sunxi: Add Allwinner SoC PWM controller
+ driver
+
+---
+ drivers/pwm/Kconfig | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/pwm/Kconfig b/drivers/pwm/Kconfig
+index 3ae89090a7d7..738bb194fa3b 100644
+--- a/drivers/pwm/Kconfig
++++ b/drivers/pwm/Kconfig
+@@ -570,11 +570,11 @@ config PWM_SUN4I
+ 	  will be called pwm-sun4i.
+ 
+ config PWM_SUN8I_V536
+-	tristate "Allwinner SUN8I_V536 PWM support"
+-	depends on ARCH_SUNXI || COMPILE_TEST
++	tristate "Allwinner SUN8I V536 enhanced PWM support"
++	depends on ARCH_SUNXI || SOC_SUNXI || COMPILE_TEST
+ 	depends on HAS_IOMEM && COMMON_CLK
+ 	help
+-	  Enhanced PWM framework driver for Allwinner R818, A133, R329,
++	  Enhanced PWM framework driver for Allwinner A133, D1, R329, R818,
+ 	  V536 and V833 SoCs.
+ 
+ 	  To compile this driver as a module, choose M here: the module
+-- 
+2.32.0
+

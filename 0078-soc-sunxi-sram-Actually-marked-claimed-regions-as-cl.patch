@@ -1,0 +1,26 @@
+From 75880ef92b10141a45ef86859fb14a3782a45907 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 19 Jan 2020 15:52:21 -0600
+Subject: [PATCH 078/120] soc: sunxi: sram: Actually marked claimed regions as
+ claimed
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/soc/sunxi/sunxi_sram.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/soc/sunxi/sunxi_sram.c b/drivers/soc/sunxi/sunxi_sram.c
+index 42833e33a96c..20b5d38e6da8 100644
+--- a/drivers/soc/sunxi/sunxi_sram.c
++++ b/drivers/soc/sunxi/sunxi_sram.c
+@@ -254,6 +254,7 @@ int sunxi_sram_claim(struct device *dev)
+ 	writel(val | ((device << sram_data->offset) & mask),
+ 	       base + sram_data->reg);
+ 
++	sram_desc->claimed = true;
+ 	spin_unlock(&sram_lock);
+ 
+ 	return 0;
+-- 
+2.32.0
+

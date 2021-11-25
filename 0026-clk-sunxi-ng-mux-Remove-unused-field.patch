@@ -1,0 +1,25 @@
+From 0674f4c705683a88a1cb573a91fd1ac7d97a8aea Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Mon, 31 May 2021 01:08:47 -0500
+Subject: [PATCH 026/120] clk: sunxi-ng: mux: Remove unused field
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/clk/sunxi-ng/ccu_mux.h | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/drivers/clk/sunxi-ng/ccu_mux.h b/drivers/clk/sunxi-ng/ccu_mux.h
+index f165395effb5..e31efc509b3d 100644
+--- a/drivers/clk/sunxi-ng/ccu_mux.h
++++ b/drivers/clk/sunxi-ng/ccu_mux.h
+@@ -40,7 +40,6 @@ struct ccu_mux_internal {
+ 	_SUNXI_CCU_MUX_TABLE(_shift, _width, NULL)
+ 
+ struct ccu_mux {
+-	u16			reg;
+ 	u32			enable;
+ 
+ 	struct ccu_mux_internal	mux;
+-- 
+2.32.0
+

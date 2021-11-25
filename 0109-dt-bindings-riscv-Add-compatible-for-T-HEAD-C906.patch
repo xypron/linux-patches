@@ -1,0 +1,25 @@
+From 3e6a6b932c1cc2baa32d1a22a1a057189402d109 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 16 May 2021 14:05:17 -0500
+Subject: [PATCH 109/120] dt-bindings: riscv: Add compatible for T-HEAD C906
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ Documentation/devicetree/bindings/riscv/cpus.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/riscv/cpus.yaml b/Documentation/devicetree/bindings/riscv/cpus.yaml
+index 482936630525..1183b46e6e70 100644
+--- a/Documentation/devicetree/bindings/riscv/cpus.yaml
++++ b/Documentation/devicetree/bindings/riscv/cpus.yaml
+@@ -40,6 +40,7 @@ properties:
+               - sifive,u5
+               - sifive,u7
+               - canaan,k210
++              - thead,c906
+           - const: riscv
+       - const: riscv    # Simulator only
+     description:
+-- 
+2.32.0
+

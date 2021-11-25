@@ -1,0 +1,33 @@
+From 2db99c3c4edbbe46257d3f880d80d6d6b6406226 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sat, 12 Jun 2021 07:56:20 -0500
+Subject: [PATCH 037/120] dt-bindings: dma: Add Allwinner D1 compatible
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ .../devicetree/bindings/dma/allwinner,sun50i-a64-dma.yaml       | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/dma/allwinner,sun50i-a64-dma.yaml b/Documentation/devicetree/bindings/dma/allwinner,sun50i-a64-dma.yaml
+index b6e1ebfaf366..7d600eb3c5ef 100644
+--- a/Documentation/devicetree/bindings/dma/allwinner,sun50i-a64-dma.yaml
++++ b/Documentation/devicetree/bindings/dma/allwinner,sun50i-a64-dma.yaml
+@@ -20,6 +20,7 @@ properties:
+ 
+   compatible:
+     oneOf:
++      - const: allwinner,sun20i-d1-dma
+       - const: allwinner,sun50i-a64-dma
+       - const: allwinner,sun50i-a100-dma
+       - const: allwinner,sun50i-h6-dma
+@@ -58,6 +59,7 @@ if:
+   properties:
+     compatible:
+       enum:
++        - allwinner,sun20i-d1-dma
+         - allwinner,sun50i-a100-dma
+         - allwinner,sun50i-h6-dma
+ 
+-- 
+2.32.0
+

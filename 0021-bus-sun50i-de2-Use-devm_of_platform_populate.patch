@@ -1,0 +1,49 @@
+From 27250de63eec01dce35467452b7a74c1a527de89 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 19 Jan 2020 15:51:36 -0600
+Subject: [PATCH 021/120] bus: sun50i-de2: Use devm_of_platform_populate
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/bus/sun50i-de2.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/bus/sun50i-de2.c b/drivers/bus/sun50i-de2.c
+index 672518741f86..889a5334558c 100644
+--- a/drivers/bus/sun50i-de2.c
++++ b/drivers/bus/sun50i-de2.c
+@@ -11,16 +11,16 @@
+ 
+ static int sun50i_de2_bus_probe(struct platform_device *pdev)
+ {
+-	struct device_node *np = pdev->dev.of_node;
++	struct device *dev = &pdev->dev;
+ 	int ret;
+ 
+-	ret = sunxi_sram_claim(&pdev->dev);
+-	if (ret) {
+-		dev_err(&pdev->dev, "Error couldn't map SRAM to device\n");
+-		return ret;
+-	}
++	ret = sunxi_sram_claim(dev);
++	if (ret)
++		return dev_err_probe(dev, ret, "Error couldn't map SRAM to device\n");
+ 
+-	of_platform_populate(np, NULL, NULL, &pdev->dev);
++	ret = devm_of_platform_populate(&pdev->dev);
++	if (ret)
++		return ret;
+ 
+ 	return 0;
+ }
+@@ -28,6 +28,7 @@ static int sun50i_de2_bus_probe(struct platform_device *pdev)
+ static int sun50i_de2_bus_remove(struct platform_device *pdev)
+ {
+ 	sunxi_sram_release(&pdev->dev);
++
+ 	return 0;
+ }
+ 
+-- 
+2.32.0
+

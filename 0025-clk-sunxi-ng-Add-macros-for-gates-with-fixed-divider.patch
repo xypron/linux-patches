@@ -1,0 +1,49 @@
+From 5f952506495db7f9c254530c2641433a94d7803f Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Mon, 31 May 2021 01:21:11 -0500
+Subject: [PATCH 025/120] clk: sunxi-ng: Add macros for gates with fixed
+ dividers
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/clk/sunxi-ng/ccu_gate.h | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/clk/sunxi-ng/ccu_gate.h b/drivers/clk/sunxi-ng/ccu_gate.h
+index c386689a952b..ae1331228873 100644
+--- a/drivers/clk/sunxi-ng/ccu_gate.h
++++ b/drivers/clk/sunxi-ng/ccu_gate.h
+@@ -53,7 +53,7 @@ struct ccu_gate {
+ 	}
+ 
+ /*
+- * The following two macros allow the re-use of the data structure
++ * The following macros allow the re-use of the data structure
+  * holding the parent info.
+  */
+ #define SUNXI_CCU_GATE_HWS(_struct, _name, _parent, _reg, _gate, _flags) \
+@@ -68,6 +68,21 @@ struct ccu_gate {
+ 		}							\
+ 	}
+ 
++#define SUNXI_CCU_GATE_HWS_WITH_PREDIV(_struct, _name, _parent, _reg,	\
++				       _gate, _prediv, _flags)		\
++	struct ccu_gate _struct = {					\
++		.enable	= _gate,					\
++		.common	= {						\
++			.reg		= _reg,				\
++			.prediv		= _prediv,			\
++			.features	= CCU_FEATURE_ALL_PREDIV,	\
++			.hw.init	= CLK_HW_INIT_HWS(_name,	\
++							  _parent,	\
++							  &ccu_gate_ops, \
++							  _flags),	\
++		}							\
++	}
++
+ #define SUNXI_CCU_GATE_DATA(_struct, _name, _data, _reg, _gate, _flags)	\
+ 	struct ccu_gate _struct = {					\
+ 		.enable	= _gate,					\
+-- 
+2.32.0
+

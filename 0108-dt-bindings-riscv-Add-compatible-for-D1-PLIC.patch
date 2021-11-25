@@ -1,0 +1,25 @@
+From 5dc422d41c4f2d635b3f084e0a6bfb4fa34406ea Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 16 May 2021 14:04:42 -0500
+Subject: [PATCH 108/120] dt-bindings: riscv: Add compatible for D1 PLIC
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ .../bindings/interrupt-controller/sifive,plic-1.0.0.yaml         | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml b/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
+index 08d5a57ce00f..673339565313 100644
+--- a/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
++++ b/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
+@@ -44,6 +44,7 @@ properties:
+   compatible:
+     items:
+       - enum:
++          - allwinner,sun20i-d1-plic
+           - sifive,fu540-c000-plic
+           - canaan,k210-plic
+       - const: sifive,plic-1.0.0
+-- 
+2.32.0
+

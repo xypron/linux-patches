@@ -1,0 +1,28 @@
+From 68697c84947580620d704d5cdb8cbfd7e5ee2450 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 13 Jun 2021 23:47:55 -0500
+Subject: [PATCH 097/120] ASoC: simple-card-utils: Fix overallocation of DLCs
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ sound/soc/generic/simple-card-utils.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/sound/soc/generic/simple-card-utils.c b/sound/soc/generic/simple-card-utils.c
+index 677f7da93b4b..10c63b73900c 100644
+--- a/sound/soc/generic/simple-card-utils.c
++++ b/sound/soc/generic/simple-card-utils.c
+@@ -640,8 +640,8 @@ int asoc_simple_init_priv(struct asoc_simple_priv *priv,
+ 			cnf_num += li->num[i].codecs;
+ 	}
+ 
+-	dais = devm_kcalloc(dev, dai_num, sizeof(*dais),      GFP_KERNEL);
+-	dlcs = devm_kcalloc(dev, dlc_num, sizeof(*dai_props), GFP_KERNEL);
++	dais = devm_kcalloc(dev, dai_num, sizeof(*dais), GFP_KERNEL);
++	dlcs = devm_kcalloc(dev, dlc_num, sizeof(*dlcs), GFP_KERNEL);
+ 	if (!dais || !dlcs)
+ 		return -ENOMEM;
+ 
+-- 
+2.32.0
+

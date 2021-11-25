@@ -1,0 +1,26 @@
+From ee96e898c9fe1e60383af69eb119a87aadc789bb Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 13 Jun 2021 23:42:55 -0500
+Subject: [PATCH 060/120] net: stmmac: dwmac-sun8i: Add D1 variant
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/net/ethernet/stmicro/stmmac/dwmac-sun8i.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/net/ethernet/stmicro/stmmac/dwmac-sun8i.c b/drivers/net/ethernet/stmicro/stmmac/dwmac-sun8i.c
+index 4422baeed3d8..576167fa4b83 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/dwmac-sun8i.c
++++ b/drivers/net/ethernet/stmicro/stmmac/dwmac-sun8i.c
+@@ -1326,6 +1326,8 @@ static const struct of_device_id sun8i_dwmac_match[] = {
+ 		.data = &emac_variant_a83t },
+ 	{ .compatible = "allwinner,sun8i-r40-gmac",
+ 		.data = &emac_variant_r40 },
++	{ .compatible = "allwinner,sun20i-d1-emac",
++		.data = &emac_variant_a64 },
+ 	{ .compatible = "allwinner,sun50i-a64-emac",
+ 		.data = &emac_variant_a64 },
+ 	{ .compatible = "allwinner,sun50i-h6-emac",
+-- 
+2.32.0
+

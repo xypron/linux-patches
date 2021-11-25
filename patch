@@ -1,0 +1,136 @@
+#/bin/sh
+
+set -e
+
+test -f Kbuild || \
+(echo 'This script must be executed in the Linux directory'; false)
+
+dir=$(dirname $0)
+
+git am --abort 2>/dev/null || true
+git rebase --abort 2>/dev/null || true
+
+git checkout nezha-patch-v5.14.21 || git checkout -b nezha-patch-v5.14.21
+
+git reset --hard v5.14.21
+
+git am $dir/0001-RISC-V-Use-SBI-SRST-extension-when-available.patch
+git am $dir/0002-RISC-V-Enable-CPU_IDLE-drivers.patch
+git am $dir/0003-RISC-V-Rename-relocate-and-make-it-global.patch
+git am $dir/0004-RISC-V-Add-arch-functions-for-non-retentive-suspend-.patch
+git am $dir/0005-RISC-V-Add-SBI-HSM-suspend-related-defines.patch
+git am $dir/0006-cpuidle-Factor-out-power-domain-related-code-from-PS.patch
+git am $dir/0007-cpuidle-Add-RISC-V-SBI-CPU-idle-driver.patch
+git am $dir/0008-cpuidle-sbi-Fix-build-with-CONFIG_SMP.patch
+git am $dir/0009-dt-bindings-Add-common-bindings-for-ARM-and-RISC-V-i.patch
+git am $dir/0010-RISC-V-Enable-RISC-V-SBI-CPU-Idle-driver-for-QEMU-vi.patch
+git am $dir/0011-riscv-Introduce-CONFIG_RELOCATABLE.patch
+git am $dir/0012-powerpc-Move-script-to-check-relocations-at-compile-.patch
+git am $dir/0013-riscv-Check-relocations-at-compile-time.patch
+git am $dir/0014-riscv-pgtable-Fixup-_PAGE_CHG_MASK-usage.patch
+git am $dir/0015-riscv-pgtable-Add-custom-protection_map-init.patch
+git am $dir/0016-riscv-pgtable-Add-DMA_COHERENT-with-custom-PTE-attri.patch
+git am $dir/0017-riscv-cmo-Add-dma-noncoherency-support.patch
+git am $dir/0018-riscv-cmo-Add-vendor-custom-icache-sync.patch
+git am $dir/0019-HACK-Enable-T-HEAD-MMU-extensions-unconditionally.patch
+git am $dir/0020-riscv-cacheinfo-Remind-myself-to-fix-this.patch
+git am $dir/0021-bus-sun50i-de2-Use-devm_of_platform_populate.patch
+git am $dir/0022-dt-bindings-clk-sunxi-ccu-Add-compatibles-for-D1-CCU.patch
+git am $dir/0023-clk-sunxi-ng-Add-missing-dependency-for-A83T-CCU.patch
+git am $dir/0024-clk-sunxi-ng-div-Add-macros-using-CLK_HW_INIT_HWS.patch
+git am $dir/0025-clk-sunxi-ng-Add-macros-for-gates-with-fixed-divider.patch
+git am $dir/0026-clk-sunxi-ng-mux-Remove-unused-field.patch
+git am $dir/0027-clk-sunxi-ng-Allow-muxes-to-have-keys.patch
+git am $dir/0028-clk-sunxi-ng-Add-support-for-newer-sun50i-RTCs.patch
+git am $dir/0029-clk-sunxi-ng-Add-support-for-the-D1-SoC-clocks.patch
+git am $dir/0030-clocksource-riscv-Prefer-it-over-MMIO-clocksources.patch
+git am $dir/0031-STUB-riscv-Enable-cpufreq.patch
+git am $dir/0032-cpufreq-sun50i-add-efuse_xlate-to-get-efuse-version.patch
+git am $dir/0033-cpufreq-sun50i-add-A100-cpufreq-support.patch
+git am $dir/0034-cpufreq-sun50i-Move-out-of-ARM-specific-section.patch
+git am $dir/0035-STUB-cpufreq-sun50i-Add-D1-cpufreq-support.patch
+git am $dir/0036-crypto-sun8i-ce-add-support-for-sun20i-d1.patch
+git am $dir/0037-dt-bindings-dma-Add-Allwinner-D1-compatible.patch
+git am $dir/0038-dmaengine-sun6i-Add-support-for-34-bit-physical-addr.patch
+git am $dir/0039-dmaengine-sun6i-Stop-using-virt_to_phys.patch
+git am $dir/0040-dmaengine-sun6i-Changes-from-BSP.patch
+git am $dir/0041-dmaengine-sun6i-Add-support-for-D1-DMA.patch
+git am $dir/0042-hwspinlock-sun6i-Update-driver-to-match-binding.patch
+git am $dir/0043-hwspinlock-sun6i-Register-layout-is-known.patch
+git am $dir/0044-hwspinlock-sun6i-Fix-debugfs-leak.patch
+git am $dir/0045-dt-bindings-input-Add-D1-support-to-LRADC-keys.patch
+git am $dir/0046-Input-sun4i-lradc-keys-Add-clock-reset-support-for-D.patch
+git am $dir/0047-Input-sun4i-lradc-keys-Add-support-for-D1.patch
+git am $dir/0048-dt-bindings-iommu-Add-compatible-for-D1-IOMMU.patch
+git am $dir/0049-WIP-iommu-sun50i-Add-support-for-D1-IOMMU.patch
+git am $dir/0050-irqchip-sun20i-Add-an-Allwinner-D1-stacked-driver.patch
+git am $dir/0051-leds-sun20i-New-driver-for-the-sun20i-internal-LED-c.patch
+git am $dir/0052-STUB-mailbox-Add-v2-mailbox.patch
+git am $dir/0053-dt-bindings-media-Add-compatible-for-D1-video-engine.patch
+git am $dir/0054-media-cedrus-Add-D1-variant.patch
+git am $dir/0055-dt-bindings-mmc-sunxi-Add-D1-MMC-and-eMMC-compatible.patch
+git am $dir/0056-mmc-sunxi-mmc-Correct-the-maximum-transfer-size.patch
+git am $dir/0057-mmc-sunxi-mmc-Fix-DMA-descriptors-above-32-bits.patch
+git am $dir/0058-mmc-sunxi-mmc-Add-D1-MMC-compatible.patch
+git am $dir/0059-mmc-sunxi-mmc-Add-more-registers.patch
+git am $dir/0060-net-stmmac-dwmac-sun8i-Add-D1-variant.patch
+git am $dir/0061-nvmem-sunxi_sid-Add-D1-variant.patch
+git am $dir/0062-of-irq-Use-interrupts-extended-to-find-parent.patch
+git am $dir/0063-phy-sun4i-usb-Rework-HCI-PHY-aka.-pmu_unk1-handling.patch
+git am $dir/0064-phy-sun4i-usb-Remove-disc_thresh-where-not-applicabl.patch
+git am $dir/0065-phy-sun4i-usb-Add-D1-variant.patch
+git am $dir/0066-dt-bindings-pinctrl-Add-compatible-for-Allwinner-D1.patch
+git am $dir/0067-pinctrl-sunxi-Support-new-2.5V-I-O-bias-mode.patch
+git am $dir/0068-HACK-pinctrl-sunxi-Adapt-for-D1-register-layout.patch
+git am $dir/0069-pinctrl-sunxi-Add-support-for-Allwinner-D1-SoC.patch
+git am $dir/0070-pwm-sun8i-v536-document-device-tree-bindings.patch
+git am $dir/0071-pwm-sunxi-Add-Allwinner-SoC-PWM-controller-driver.patch
+git am $dir/0072-squash-pwm-sunxi-Add-Allwinner-SoC-PWM-controller-dr.patch
+git am $dir/0073-pwm-sun8i-v536-Add-support-for-the-Allwinner-D1.patch
+git am $dir/0074-remoteproc-sun8i-dsp-Add-a-driver-for-the-DSPs-in-su.patch
+git am $dir/0075-rtc-sun6i-Add-support-for-linear-day-storage.patch
+git am $dir/0076-rtc-sun6i-Add-Allwinner-H616-support.patch
+git am $dir/0077-WIP-rtc-sun6i-Make-fw_devlink-happy.patch
+git am $dir/0078-soc-sunxi-sram-Actually-marked-claimed-regions-as-cl.patch
+git am $dir/0079-soc-sunxi-sram-Map-SRAM-back-to-CPU-on-release.patch
+git am $dir/0080-soc-sunxi-sram-Fix-debugfs-file-leak.patch
+git am $dir/0081-soc-sunxi-sram-Use-devm_of_platform_populate.patch
+git am $dir/0082-soc-sunxi-sram-Add-support-for-D1-LDOs.patch
+git am $dir/0083-soc-sunxi-sram-Fix-debugfs-for-A64-SRAM-C.patch
+git am $dir/0084-soc-sunxi-sram-Add-D1-DSP-SRAM.patch
+git am $dir/0085-soc-sunxi-sram-Add-D1-syscon-variant.patch
+git am $dir/0086-spi-spi-sun6i-Use-a-struct-for-quirks.patch
+git am $dir/0087-spi-spi-sun6i-Add-Allwinner-R329-support.patch
+git am $dir/0088-thermal-of-Remove-duplicate-null-check.patch
+git am $dir/0089-dt-bindings-thermal-sun8i-Add-compatible-for-D1-ther.patch
+git am $dir/0090-thermal-sun8i-Fill-in-the-unknown-field-name.patch
+git am $dir/0091-thermal-sun8i-Set-the-event-type-for-new-samples.patch
+git am $dir/0092-thermal-sun8i-Use-optional-clock-reset-getters.patch
+git am $dir/0093-thermal-sun8i-Ensure-vref-is-powered.patch
+git am $dir/0094-thermal-sun8i-Add-support-for-the-D1-thermal-sensor.patch
+git am $dir/0095-dt-bindings-watchdog-Add-compatible-for-Allwinner-D1.patch
+git am $dir/0096-watchdog-sunxi_wdt-Add-support-for-the-D1-SoC.patch
+git am $dir/0097-ASoC-simple-card-utils-Fix-overallocation-of-DLCs.patch
+git am $dir/0098-ASoC-sun4i-i2s-Correct-registers-for-multiple-data-p.patch
+git am $dir/0099-ASoC-sun4i-i2s-Also-set-capture-DMA-width.patch
+git am $dir/0100-ASoC-sun4i-i2s-Add-D1-variant.patch
+git am $dir/0101-WIP-ASoC-sun4i-spdif-Add-support-for-separate-resets.patch
+git am $dir/0102-WIP-ASoC-sun4i-spdif-Add-support-for-separate-clocks.patch
+git am $dir/0103-WIP-ASoC-sun4i-spdif-Add-D1-variant.patch
+git am $dir/0104-ASoC-sun20i-codec-New-driver-for-D1-internal-codec.patch
+git am $dir/0105-WIP-ASoC-sun20i-codec-What-is-this-ramp-thing.patch
+git am $dir/0106-SPLIT-dt-bindings-Add-compatibles-for-D1.patch
+git am $dir/0107-SPLIT-treewide-ARCH_SUNXI-SOC_SUNXI.patch
+git am $dir/0108-dt-bindings-riscv-Add-compatible-for-D1-PLIC.patch
+git am $dir/0109-dt-bindings-riscv-Add-compatible-for-T-HEAD-C906.patch
+git am $dir/0110-WIP-riscv-Add-Allwinner-D1-SoC-support.patch
+git am $dir/0111-WIP-riscv-Add-Allwinner-D1-SoC-device-tree.patch
+git am $dir/0112-TEMP-Add-static-memory-info-to-the-D1-device-tree.patch
+git am $dir/0113-WIP-riscv-Add-D1-Nezha-board-device-tree.patch
+git am $dir/0114-DO-NOT-MERGE-misc-changes.patch
+git am $dir/0115-WIP-spi-spi-sun6i-Dual-Quad-RX-Support.patch
+git am $dir/0116-DO-NOT-MERGE-Add-a-defconfig-for-the-NeZha.patch
+git am $dir/0117-pinctrl-sunxi-sunxi_pinctrl_irq_ack-avoid-build-warn.patch
+git am $dir/0118-riscv-configs-nezha_fedora_defconfig.patch
+git am $dir/0119-tmp-fix.patch
+git am $dir/0120-configs-update-nezha_defconfig.patch

@@ -1,0 +1,45 @@
+From 8715f48730835a83de90c59ab87d9009743e4926 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 16 May 2021 14:48:49 -0500
+Subject: [PATCH 081/120] soc: sunxi: sram: Use devm_of_platform_populate
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/soc/sunxi/sunxi_sram.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/soc/sunxi/sunxi_sram.c b/drivers/soc/sunxi/sunxi_sram.c
+index 681d53545dd8..7b7d4474a634 100644
+--- a/drivers/soc/sunxi/sunxi_sram.c
++++ b/drivers/soc/sunxi/sunxi_sram.c
+@@ -345,6 +345,7 @@ static int sunxi_sram_probe(struct platform_device *pdev)
+ 	struct resource *res;
+ 	struct regmap *emac_clock;
+ 	const struct sunxi_sramc_variant *variant;
++	int ret;
+ 
+ 	sram_dev = &pdev->dev;
+ 
+@@ -357,8 +358,6 @@ static int sunxi_sram_probe(struct platform_device *pdev)
+ 	if (IS_ERR(base))
+ 		return PTR_ERR(base);
+ 
+-	of_platform_populate(pdev->dev.of_node, NULL, NULL, &pdev->dev);
+-
+ 	if (variant->num_emac_clocks > 0) {
+ 		emac_clock = devm_regmap_init_mmio(&pdev->dev, base,
+ 						   &sunxi_sram_emac_clock_regmap);
+@@ -367,6 +366,10 @@ static int sunxi_sram_probe(struct platform_device *pdev)
+ 			return PTR_ERR(emac_clock);
+ 	}
+ 
++	ret = devm_of_platform_populate(&pdev->dev);
++	if (ret)
++		return ret;
++
+ 	debugfs_dir = debugfs_create_dir("sunxi-sram", NULL);
+ 	debugfs_create_file("sram", S_IRUGO, debugfs_dir, NULL,
+ 			    &sunxi_sram_fops);
+-- 
+2.32.0
+

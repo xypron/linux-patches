@@ -1,0 +1,43 @@
+From 0c65f3575cc7b318f1b6bdc1eea7290feccdf5e9 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 13 Jun 2021 23:53:26 -0500
+Subject: [PATCH 103/120] [WIP] ASoC: sun4i-spdif: Add D1 variant
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ sound/soc/sunxi/sun4i-spdif.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/sound/soc/sunxi/sun4i-spdif.c b/sound/soc/sunxi/sun4i-spdif.c
+index fd9580ff24ec..6f5b3ad89474 100644
+--- a/sound/soc/sunxi/sun4i-spdif.c
++++ b/sound/soc/sunxi/sun4i-spdif.c
+@@ -448,6 +448,14 @@ static const struct sun4i_spdif_quirks sun8i_h3_spdif_quirks = {
+ 	.has_reset	= true,
+ };
+ 
++static const struct sun4i_spdif_quirks sun20i_d1_spdif_quirks = {
++	.rx_clk_name	= "rx",
++	.tx_clk_name	= "tx",
++	.reg_dac_txdata = SUN8I_SPDIF_TXFIFO,
++	.val_fctl_ftx   = SUN50I_H6_SPDIF_FCTL_FTX,
++	.has_reset      = true,
++};
++
+ static const struct sun4i_spdif_quirks sun50i_h6_spdif_quirks = {
+ 	.tx_clk_name	= "spdif",
+ 	.reg_dac_txdata = SUN8I_SPDIF_TXFIFO,
+@@ -468,6 +476,10 @@ static const struct of_device_id sun4i_spdif_of_match[] = {
+ 		.compatible = "allwinner,sun8i-h3-spdif",
+ 		.data = &sun8i_h3_spdif_quirks,
+ 	},
++	{
++		.compatible = "allwinner,sun20i-d1-spdif",
++		.data = &sun20i_d1_spdif_quirks,
++	},
+ 	{
+ 		.compatible = "allwinner,sun50i-h6-spdif",
+ 		.data = &sun50i_h6_spdif_quirks,
+-- 
+2.32.0
+

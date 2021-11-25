@@ -1,0 +1,26 @@
+From f6f463e7456da2e34e25090e7031e45c6b48e16d Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 6 Jun 2021 10:52:53 -0500
+Subject: [PATCH 053/120] dt-bindings: media: Add compatible for D1 video
+ engine
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ .../bindings/media/allwinner,sun4i-a10-video-engine.yaml         | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/media/allwinner,sun4i-a10-video-engine.yaml b/Documentation/devicetree/bindings/media/allwinner,sun4i-a10-video-engine.yaml
+index c34303b87a5b..c3de96d10396 100644
+--- a/Documentation/devicetree/bindings/media/allwinner,sun4i-a10-video-engine.yaml
++++ b/Documentation/devicetree/bindings/media/allwinner,sun4i-a10-video-engine.yaml
+@@ -20,6 +20,7 @@ properties:
+       - allwinner,sun8i-h3-video-engine
+       - allwinner,sun8i-v3s-video-engine
+       - allwinner,sun8i-r40-video-engine
++      - allwinner,sun20i-d1-video-engine
+       - allwinner,sun50i-a64-video-engine
+       - allwinner,sun50i-h5-video-engine
+       - allwinner,sun50i-h6-video-engine
+-- 
+2.32.0
+

@@ -1,0 +1,26 @@
+From 43d4fc9a4316547f83459511dd85a49af92cc05d Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 6 Jun 2021 15:02:27 -0500
+Subject: [PATCH 031/120] [STUB] riscv: Enable cpufreq
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ arch/riscv/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index 2ff6dff2b076..b65fbc1b088b 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -589,6 +589,8 @@ endmenu
+ 
+ menu "CPU Power Management"
+ 
++source "drivers/cpufreq/Kconfig"
++
+ source "drivers/cpuidle/Kconfig"
+ 
+ endmenu
+-- 
+2.32.0
+

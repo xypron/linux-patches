@@ -1,0 +1,56 @@
+From 0bf6b8b540ae56d1eacfbda7fa52aae2b0e72b88 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 6 Jun 2021 09:30:03 -0500
+Subject: [PATCH 045/120] dt-bindings: input: Add D1 support to LRADC keys
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ .../input/allwinner,sun4i-a10-lradc-keys.yaml  | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/input/allwinner,sun4i-a10-lradc-keys.yaml b/Documentation/devicetree/bindings/input/allwinner,sun4i-a10-lradc-keys.yaml
+index cffd02028d02..d8df7dae7a35 100644
+--- a/Documentation/devicetree/bindings/input/allwinner,sun4i-a10-lradc-keys.yaml
++++ b/Documentation/devicetree/bindings/input/allwinner,sun4i-a10-lradc-keys.yaml
+@@ -15,6 +15,7 @@ properties:
+     oneOf:
+       - const: allwinner,sun4i-a10-lradc-keys
+       - const: allwinner,sun8i-a83t-r-lradc
++      - const: allwinner,sun20i-d1-lradc
+       - items:
+           - const: allwinner,sun50i-a64-lradc
+           - const: allwinner,sun8i-a83t-r-lradc
+@@ -22,6 +23,12 @@ properties:
+   reg:
+     maxItems: 1
+ 
++  clocks:
++    maxItems: 1
++
++  resets:
++    maxItems: 1
++
+   interrupts:
+     maxItems: 1
+ 
+@@ -66,6 +73,17 @@ required:
+   - interrupts
+   - vref-supply
+ 
++if:
++  properties:
++    compatible:
++      enum:
++        - allwinner,sun20i-d1-lradc
++
++then:
++  required:
++    - clocks
++    - resets
++
+ additionalProperties: false
+ 
+ examples:
+-- 
+2.32.0
+

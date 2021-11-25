@@ -1,0 +1,74 @@
+From 18368e9cc846ff92b40994a2ae083752bcf038d0 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 6 Jun 2021 10:03:12 -0500
+Subject: [PATCH 089/120] dt-bindings: thermal: sun8i: Add compatible for D1
+ thermal sensor
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ .../thermal/allwinner,sun8i-a83t-ths.yaml     | 21 ++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/devicetree/bindings/thermal/allwinner,sun8i-a83t-ths.yaml b/Documentation/devicetree/bindings/thermal/allwinner,sun8i-a83t-ths.yaml
+index 6e0b110153b0..f72ceef424bd 100644
+--- a/Documentation/devicetree/bindings/thermal/allwinner,sun8i-a83t-ths.yaml
++++ b/Documentation/devicetree/bindings/thermal/allwinner,sun8i-a83t-ths.yaml
+@@ -16,6 +16,7 @@ properties:
+       - allwinner,sun8i-a83t-ths
+       - allwinner,sun8i-h3-ths
+       - allwinner,sun8i-r40-ths
++      - allwinner,sun20i-d1-ths
+       - allwinner,sun50i-a64-ths
+       - allwinner,sun50i-a100-ths
+       - allwinner,sun50i-h5-ths
+@@ -55,6 +56,10 @@ properties:
+       - 0
+       - 1
+ 
++  vref-supply:
++    description:
++      Regulator for the analog reference voltage
++
+ allOf:
+   - if:
+       properties:
+@@ -84,7 +89,9 @@ allOf:
+       properties:
+         compatible:
+           contains:
+-            const: allwinner,sun8i-h3-ths
++            enum:
++              - allwinner,sun8i-h3-ths
++              - allwinner,sun20i-d1-ths
+ 
+     then:
+       properties:
+@@ -103,6 +110,7 @@ allOf:
+             enum:
+               - allwinner,sun8i-h3-ths
+               - allwinner,sun8i-r40-ths
++              - allwinner,sun20i-d1-ths
+               - allwinner,sun50i-a64-ths
+               - allwinner,sun50i-a100-ths
+               - allwinner,sun50i-h5-ths
+@@ -114,6 +122,17 @@ allOf:
+         - clock-names
+         - resets
+ 
++  - if:
++      properties:
++        compatible:
++          contains:
++            enum:
++              - allwinner,sun20i-d1-ths
++
++    then:
++      required:
++        - vref-supply
++
+ required:
+   - compatible
+   - reg
+-- 
+2.32.0
+

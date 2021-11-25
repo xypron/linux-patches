@@ -1,0 +1,44 @@
+From ddbee7958ba9d45bbcbc187e7f1e2f31684a6e92 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Mon, 31 May 2021 01:08:23 -0500
+Subject: [PATCH 024/120] clk: sunxi-ng: div: Add macros using CLK_HW_INIT_HWS
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ drivers/clk/sunxi-ng/ccu_div.h | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/drivers/clk/sunxi-ng/ccu_div.h b/drivers/clk/sunxi-ng/ccu_div.h
+index 6682fde6043c..938918eca2e8 100644
+--- a/drivers/clk/sunxi-ng/ccu_div.h
++++ b/drivers/clk/sunxi-ng/ccu_div.h
+@@ -166,6 +166,26 @@ struct ccu_div {
+ 	SUNXI_CCU_M_WITH_GATE(_struct, _name, _parent, _reg,		\
+ 			      _mshift, _mwidth, 0, _flags)
+ 
++#define SUNXI_CCU_M_HWS_WITH_GATE(_struct, _name, _parent, _reg,	\
++				  _mshift, _mwidth,	_gate,		\
++				  _flags)				\
++	struct ccu_div _struct = {					\
++		.enable	= _gate,					\
++		.div	= _SUNXI_CCU_DIV(_mshift, _mwidth),		\
++		.common	= {						\
++			.reg		= _reg,				\
++			.hw.init	= CLK_HW_INIT_HWS(_name,	\
++							  _parent,	\
++							  &ccu_div_ops,	\
++							  _flags),	\
++		},							\
++	}
++
++#define SUNXI_CCU_M_HWS(_struct, _name, _parent, _reg, _mshift,		\
++			_mwidth, _flags)				\
++	SUNXI_CCU_M_HWS_WITH_GATE(_struct, _name, _parent, _reg,	\
++				  _mshift, _mwidth, 0, _flags)
++
+ static inline struct ccu_div *hw_to_ccu_div(struct clk_hw *hw)
+ {
+ 	struct ccu_common *common = hw_to_ccu_common(hw);
+-- 
+2.32.0
+
